@@ -1,0 +1,9 @@
+.env
+data/
+logs/
+import/
+snapshots/
+__pycache__/
+*.pyc
+.pydeps/
+.venv/

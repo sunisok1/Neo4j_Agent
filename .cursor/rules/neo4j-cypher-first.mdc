@@ -1,0 +1,12 @@
+---
+description: Prefer Cypher over full scripts for Neo4j changes
+alwaysApply: true
+---
+
+# Neo4j: Cypher-first responses
+
+- When the user asks to apply content to a Neo4j graph, **prefer providing executable Cypher** the user can paste into Neo4j Browser/Bloom.
+- **Do not write a full Python script** (or other program) for import/sync unless the user explicitly requests a script.
+- **Put all statements in a single fenced code block** so the user can copy everything at once. Use `//` comment lines as section dividers instead of splitting into multiple code blocks.
+- Separate statements with semicolons (`;`). Each statement should be valid Cypher on its own.
+- Use `MERGE` for idempotency when appropriate.
