@@ -4,7 +4,7 @@
 Output is optimised for Git:
 - one statement per line
 - nodes / relationships sorted for stable diffs
-- separate files for schema, nodes, relationships
+- each node/relationship carries a stable __sync_id (UUID) for matching
 """
 
 from __future__ import annotations
@@ -19,10 +19,11 @@ from typing import Any
 INSTANCE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(INSTANCE_DIR / "scripts"))
 
-from graph_sync import load_env, wait_for_neo4j  # noqa: E402
+from graph_sync import ensure_sync_ids, load_env, wait_for_neo4j  # noqa: E402
 from neo4j import GraphDatabase  # noqa: E402
 
 DEFAULT_EXPORT_DIR = INSTANCE_DIR / "export"
+SYNC_ID = "__sync_id"
 
 
 def cypher_literal(value: Any) -> str:
@@ -46,10 +47,9 @@ def cypher_literal(value: Any) -> str:
     return cypher_literal(str(value))
 
 
-def props_block(props: dict[str, Any], exclude: set[str] | None = None) -> str:
+def props_block(props: dict[str, Any]) -> str:
     """Build a Cypher property map like {name: 'Alice', age: 30}."""
-    exclude = exclude or set()
-    filtered = {k: v for k, v in sorted(props.items()) if k not in exclude and v is not None}
+    filtered = {k: v for k, v in sorted(props.items()) if v is not None}
     if not filtered:
         return ""
     pairs = ", ".join(f"`{k}`: {cypher_literal(v)}" for k, v in filtered.items())
@@ -63,11 +63,11 @@ def label_clause(labels: list[str]) -> str:
 
 
 def node_sort_key(node: dict) -> tuple:
-    """Stable sort: by first label, then by name/title/id-like property, then by all props."""
+    """Stable sort: by first label, then by name/title, then by __sync_id."""
     labels = sorted(node.get("labels") or [])
     props = node.get("props") or {}
-    name = props.get("name") or props.get("title") or props.get("id") or ""
-    return (labels, str(name), json.dumps(props, sort_keys=True, ensure_ascii=False))
+    name = props.get("name") or props.get("title") or ""
+    return (labels, str(name), props.get(SYNC_ID, ""))
 
 
 def export_schema(session) -> list[str]:
@@ -102,22 +102,11 @@ def export_schema(session) -> list[str]:
     return lines
 
 
-def match_key_for(labels: list[str], props: dict[str, Any]) -> str:
-    """Build a MATCH clause that uniquely identifies a node by label + name."""
-    lc = label_clause(labels)
-    name = props.get("name")
-    if name is not None:
-        return f"(x{lc} {{`name`: {cypher_literal(name)}}})"
-    for fallback in ("title", "id"):
-        val = props.get(fallback)
-        if val is not None:
-            return f"(x{lc} {{`{fallback}`: {cypher_literal(val)}}})"
-    key_props = props_block(props, exclude={"__sync_id"})
-    return f"(x{lc}{key_props})"
+def export_nodes(session) -> tuple[list[str], dict[str, str]]:
+    """Export all nodes as CREATE statements.
 
-
-def export_nodes(session) -> tuple[list[str], dict[str, dict]]:
-    """Export all nodes as MERGE statements. Returns (lines, elementId→node info map)."""
+    Returns (lines, elementId → __sync_id map).
+    """
     raw = session.run(
         "MATCH (n) "
         "RETURN elementId(n) AS id, labels(n) AS labels, properties(n) AS props"
@@ -125,20 +114,22 @@ def export_nodes(session) -> tuple[list[str], dict[str, dict]]:
 
     raw.sort(key=node_sort_key)
     lines: list[str] = []
-    id_info: dict[str, dict] = {}
+    id_to_sid: dict[str, str] = {}
 
     for node in raw:
         labels = sorted(node.get("labels") or [])
         props = node.get("props") or {}
-        id_info[node["id"]] = {"labels": labels, "props": props}
+        sid = props.get(SYNC_ID)
+        if sid:
+            id_to_sid[node["id"]] = sid
         lc = label_clause(labels)
-        pb = props_block(props, exclude={"__sync_id"})
+        pb = props_block(props)
         lines.append(f"CREATE (n{lc}{pb});")
 
-    return lines, id_info
+    return lines, id_to_sid
 
 
-def export_relationships(session, id_info: dict[str, dict]) -> list[str]:
+def export_relationships(session, id_to_sid: dict[str, str]) -> list[str]:
     raw = session.run(
         "MATCH (a)-[r]->(b) "
         "RETURN elementId(a) AS start, elementId(b) AS end, "
@@ -147,26 +138,26 @@ def export_relationships(session, id_info: dict[str, dict]) -> list[str]:
 
     rels = []
     for rel in raw:
-        si = id_info.get(rel["start"])
-        ei = id_info.get(rel["end"])
-        if not si or not ei:
+        start_sid = id_to_sid.get(rel["start"])
+        end_sid = id_to_sid.get(rel["end"])
+        if not start_sid or not end_sid:
             continue
-        start_key = match_key_for(si["labels"], si["props"])
-        end_key = match_key_for(ei["labels"], ei["props"])
         rels.append({
             "type": rel["type"],
             "props": rel.get("props") or {},
-            "start_key": start_key,
-            "end_key": end_key,
+            "start_sid": start_sid,
+            "end_sid": end_sid,
         })
 
-    rels.sort(key=lambda r: (r["type"], r["start_key"], r["end_key"]))
+    rels.sort(key=lambda r: (r["type"], r["start_sid"], r["end_sid"]))
     lines: list[str] = []
     for rel in rels:
-        pb = props_block(rel["props"], exclude={"__sync_id"})
-        sk = rel["start_key"].replace("(x", "(a", 1)
-        ek = rel["end_key"].replace("(x", "(b", 1)
-        lines.append(f"MATCH {sk} MATCH {ek} CREATE (a)-[:`{rel['type']}`{pb}]->(b);")
+        pb = props_block(rel["props"])
+        lines.append(
+            f"MATCH (a {{`{SYNC_ID}`: {cypher_literal(rel['start_sid'])}}})"
+            f" MATCH (b {{`{SYNC_ID}`: {cypher_literal(rel['end_sid'])}}})"
+            f" CREATE (a)-[:`{rel['type']}`{pb}]->(b);"
+        )
 
     return lines
 
@@ -206,14 +197,19 @@ def main() -> int:
 
     try:
         with driver.session(database=database) as session:
+            print("Ensuring __sync_id on all nodes and relationships ...")
+            assigned = ensure_sync_ids(session)
+            if assigned["nodes"] or assigned["relationships"]:
+                print(f"  Assigned new IDs: {assigned['nodes']} nodes, {assigned['relationships']} relationships")
+
             print("Exporting schema ...")
             schema_lines = export_schema(session)
 
             print("Exporting nodes ...")
-            node_lines, id_map = export_nodes(session)
+            node_lines, id_to_sid = export_nodes(session)
 
             print("Exporting relationships ...")
-            rel_lines = export_relationships(session, id_map)
+            rel_lines = export_relationships(session, id_to_sid)
     finally:
         driver.close()
 
