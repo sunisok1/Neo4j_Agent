@@ -1,5 +1,5 @@
 // Relationships
-// exported at 2026-06-24 01:50:39 UTC
+// exported at 2026-06-25 01:59:41 UTC
 
 MATCH (a {`__sync_id`: '020b6f44-6f34-4169-941c-7626a70ab6fb'}) MATCH (b {`__sync_id`: 'da847e8c-8647-4c9e-a616-283a8a344030'}) CREATE (a)-[:`BELONGED_TO` {`__sync_id`: '2d94878c-2b5d-47c3-b4c9-66605e50a1f3'}]->(b);
 MATCH (a {`__sync_id`: '07c39e64-3329-4afe-9a3d-6dab68d6679e'}) MATCH (b {`__sync_id`: 'cefb5626-1b36-414e-9ce2-47a9a22f2ca1'}) CREATE (a)-[:`BELONGED_TO` {`__sync_id`: '756c1bff-ba96-4d03-aebc-6f5e0a466949'}]->(b);
@@ -450,3 +450,49 @@ MATCH (a {`__sync_id`: '23322aa2-06fc-48d9-ae5a-284a79df3efc'}) MATCH (b {`__syn
 MATCH (a {`__sync_id`: '1c266c5f-cecd-4567-a5cc-b09b56e04212'}) MATCH (b {`__sync_id`: 'f4802d19-e12e-4a09-b703-cab00a07636b'}) CREATE (a)-[:`WEAKENED_CLAIM_OF` {`__sync_id`: '87478943-b876-4635-ac08-994cf98778a1', `description`: '亨利合法男性继承人威廉·阿德林溺亡，引发继承危机', `name`: '白船号沉没', `name_en`: 'White Ship disaster', `year`: 1120}]->(b);
 MATCH (a {`__sync_id`: '15b2c900-abeb-4ba4-881a-45c82b3d1e7e'}) MATCH (b {`__sync_id`: '915cff28-82a3-4e06-b857-08045f453f07'}) CREATE (a)-[:`WON_AT` {`__sync_id`: '4b49f007-463a-499a-b2d6-f17f45bd705c'}]->(b);
 MATCH (a {`__sync_id`: 'a0ed361b-ba89-41fb-a9ff-64fcb469f543'}) MATCH (b {`__sync_id`: '0ccdb62d-97a3-4bb6-9f91-55538db48495'}) CREATE (a)-[:`WON_AT` {`__sync_id`: '0ba2cde1-48ba-4a59-8117-e479941ef079'}]->(b);
+MATCH (a {`__sync_id`: 'ce44c661-fe69-4bc4-914f-2aaf100a1a62'}) MATCH (b {`__sync_id`: '0d3e2211-df7f-4c5b-98e5-62f06850fc46'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: '047c30cb-1cd4-411d-aac3-0c56bf14c2ed'}]->(b);
+MATCH (a {`__sync_id`: '7e7bf693-002c-4539-9dce-873ae476ccb6'}) MATCH (b {`__sync_id`: '3735cc2d-0d81-48e1-8e81-c6f33887ce82'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '0629c23b-e220-4971-81c2-327a6ff41169'}]->(b);
+MATCH (a {`__sync_id`: 'c62b7535-2f8a-42c7-8e12-7d9e84a4a70f'}) MATCH (b {`__sync_id`: '1e7c1376-5dd6-4b55-b0bf-2fd8bc6e5f23'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '0ddf70b7-aebc-49eb-a871-e02f0f7c0e6f'}]->(b);
+MATCH (a {`__sync_id`: 'ce44c661-fe69-4bc4-914f-2aaf100a1a62'}) MATCH (b {`__sync_id`: '862e81e0-3fd5-4d95-8480-d02d01e025dc'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '10d9c5b4-4198-4721-aefe-224733f5a22c'}]->(b);
+MATCH (a {`__sync_id`: 'bcd0a54c-3ecd-412a-93ed-70e2d7c91734'}) MATCH (b {`__sync_id`: '7e7bf693-002c-4539-9dce-873ae476ccb6'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '13db3940-b2cd-4ce7-8697-7d395731df1a'}]->(b);
+MATCH (a {`__sync_id`: 'c62b7535-2f8a-42c7-8e12-7d9e84a4a70f'}) MATCH (b {`__sync_id`: '2726dcbf-7778-40d0-920f-be29ee28bcbd'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: '14c3d871-18ea-4eed-97fb-fd80f1e64b38'}]->(b);
+MATCH (a {`__sync_id`: '2726dcbf-7778-40d0-920f-be29ee28bcbd'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: '14fb38c9-085a-4570-9f5d-408e420c48d3'}]->(b);
+MATCH (a {`__sync_id`: 'bcd0a54c-3ecd-412a-93ed-70e2d7c91734'}) MATCH (b {`__sync_id`: '3735cc2d-0d81-48e1-8e81-c6f33887ce82'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: '1629190d-1d5e-4fee-800c-cf271dd61880'}]->(b);
+MATCH (a {`__sync_id`: '0262702a-4d1a-4c2e-8afc-0ec32e7eb302'}) MATCH (b {`__sync_id`: 'a43e150c-eee2-4cd7-b7bd-d6ca80d899e0'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '1a28b8a5-633a-4f2c-b5b2-dbc14fc9024b'}]->(b);
+MATCH (a {`__sync_id`: '862e81e0-3fd5-4d95-8480-d02d01e025dc'}) MATCH (b {`__sync_id`: 'c25f9e7d-913d-4186-96e6-ec5338ae432f'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '1a31ade5-d498-4242-80f8-607964605820'}]->(b);
+MATCH (a {`__sync_id`: '0d3e2211-df7f-4c5b-98e5-62f06850fc46'}) MATCH (b {`__sync_id`: '0d9b0241-87d7-442b-96cc-990da5937a53'}) CREATE (a)-[:`PARTICIPATED_IN` {`__sync_id`: '254737d7-21e8-4a97-857a-b22f3488f063'}]->(b);
+MATCH (a {`__sync_id`: 'c25f9e7d-913d-4186-96e6-ec5338ae432f'}) MATCH (b {`__sync_id`: '0d3e2211-df7f-4c5b-98e5-62f06850fc46'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '2b3659ed-fbcf-4247-9568-c5b9653924e6'}]->(b);
+MATCH (a {`__sync_id`: 'ad886e5f-ce92-4315-b981-68f2ed8e00b5'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: '3b533116-fd68-4690-b5c3-6f1c294bcee1'}]->(b);
+MATCH (a {`__sync_id`: '2726dcbf-7778-40d0-920f-be29ee28bcbd'}) MATCH (b {`__sync_id`: '862e81e0-3fd5-4d95-8480-d02d01e025dc'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: '47a06552-aa1a-439e-b3d8-7274ae78b396'}]->(b);
+MATCH (a {`__sync_id`: '1e94693b-4cfc-4c15-8081-0ff2594236f3'}) MATCH (b {`__sync_id`: '0262702a-4d1a-4c2e-8afc-0ec32e7eb302'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: '4a3c0242-b778-4c1e-8350-3380ccadef03'}]->(b);
+MATCH (a {`__sync_id`: '1e94693b-4cfc-4c15-8081-0ff2594236f3'}) MATCH (b {`__sync_id`: 'ad886e5f-ce92-4315-b981-68f2ed8e00b5'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '4d5a0670-f86a-4ec8-8ef7-89c0365c25b1'}]->(b);
+MATCH (a {`__sync_id`: '1e7c1376-5dd6-4b55-b0bf-2fd8bc6e5f23'}) MATCH (b {`__sync_id`: '2726dcbf-7778-40d0-920f-be29ee28bcbd'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '4d7b2dd3-1b0a-46de-bc95-8889f480b2be'}]->(b);
+MATCH (a {`__sync_id`: '2726dcbf-7778-40d0-920f-be29ee28bcbd'}) MATCH (b {`__sync_id`: 'ce44c661-fe69-4bc4-914f-2aaf100a1a62'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '58e7723a-b417-497a-b30c-cdb3f11ff067'}]->(b);
+MATCH (a {`__sync_id`: 'c25f9e7d-913d-4186-96e6-ec5338ae432f'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: '5e752122-c12f-4017-bc0e-c51f81a77e0e'}]->(b);
+MATCH (a {`__sync_id`: '1e94693b-4cfc-4c15-8081-0ff2594236f3'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: '61e32bd5-4e1c-4d37-a81e-a416457c0fd8'}]->(b);
+MATCH (a {`__sync_id`: '1e7c1376-5dd6-4b55-b0bf-2fd8bc6e5f23'}) MATCH (b {`__sync_id`: 'c25f9e7d-913d-4186-96e6-ec5338ae432f'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: '636154c9-5c62-45b5-81b5-4cd4c884e1ae'}]->(b);
+MATCH (a {`__sync_id`: 'ce44c661-fe69-4bc4-914f-2aaf100a1a62'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: '6d47508f-71b2-4f66-a742-811a8bc95ab1'}]->(b);
+MATCH (a {`__sync_id`: 'c62b7535-2f8a-42c7-8e12-7d9e84a4a70f'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: '746a8559-5fdf-45da-82e4-f8ab7f4e932d'}]->(b);
+MATCH (a {`__sync_id`: '3735cc2d-0d81-48e1-8e81-c6f33887ce82'}) MATCH (b {`__sync_id`: '1e7c1376-5dd6-4b55-b0bf-2fd8bc6e5f23'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: '82668711-7a06-492a-a54f-c72df95a63c3'}]->(b);
+MATCH (a {`__sync_id`: 'a43e150c-eee2-4cd7-b7bd-d6ca80d899e0'}) MATCH (b {`__sync_id`: 'f72f03e8-41a4-4859-8ba0-e25dddbc5e51'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: '91fdf999-75d4-41ad-8641-6e1c85457b4b'}]->(b);
+MATCH (a {`__sync_id`: '1e94693b-4cfc-4c15-8081-0ff2594236f3'}) MATCH (b {`__sync_id`: 'b9bb77a8-8e85-462c-b75d-31f8e073026a'}) CREATE (a)-[:`PARTICIPATED_IN` {`__sync_id`: 'a0859caf-8012-44fc-b960-88ea0e3083ba'}]->(b);
+MATCH (a {`__sync_id`: '1e7c1376-5dd6-4b55-b0bf-2fd8bc6e5f23'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'a356d549-8064-4dee-85e1-0958e0fd9b73'}]->(b);
+MATCH (a {`__sync_id`: '3735cc2d-0d81-48e1-8e81-c6f33887ce82'}) MATCH (b {`__sync_id`: 'ce44c661-fe69-4bc4-914f-2aaf100a1a62'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: 'ab1b81b6-9776-4efc-86dd-08d57b1d89f1'}]->(b);
+MATCH (a {`__sync_id`: 'f72f03e8-41a4-4859-8ba0-e25dddbc5e51'}) MATCH (b {`__sync_id`: 'bcd0a54c-3ecd-412a-93ed-70e2d7c91734'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: 'af196a23-5bdd-47e2-bd1e-25b7b3460bb9'}]->(b);
+MATCH (a {`__sync_id`: 'f72f03e8-41a4-4859-8ba0-e25dddbc5e51'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'b7a6e61d-235e-4585-a1ae-32e5def10ea9'}]->(b);
+MATCH (a {`__sync_id`: 'a43e150c-eee2-4cd7-b7bd-d6ca80d899e0'}) MATCH (b {`__sync_id`: '7e7bf693-002c-4539-9dce-873ae476ccb6'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: 'b7b2bbb2-278a-4106-9639-53692fd29959'}]->(b);
+MATCH (a {`__sync_id`: '3735cc2d-0d81-48e1-8e81-c6f33887ce82'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'bb4058bb-b7c9-4d84-9242-e482c1b2228c'}]->(b);
+MATCH (a {`__sync_id`: '7e7bf693-002c-4539-9dce-873ae476ccb6'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'bb5efd64-7f8b-428a-92da-6526231dfe36'}]->(b);
+MATCH (a {`__sync_id`: '1e94693b-4cfc-4c15-8081-0ff2594236f3'}) MATCH (b {`__sync_id`: 'a43e150c-eee2-4cd7-b7bd-d6ca80d899e0'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: 'c04891da-4063-42ba-b647-a011d350d5ff'}]->(b);
+MATCH (a {`__sync_id`: '367d8176-e8e7-4504-9089-7a35cf934da7'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'c41acd4b-c0e8-4ad7-ba9c-f0d43a62c809'}]->(b);
+MATCH (a {`__sync_id`: '3735cc2d-0d81-48e1-8e81-c6f33887ce82'}) MATCH (b {`__sync_id`: 'c62b7535-2f8a-42c7-8e12-7d9e84a4a70f'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: 'c9db65a3-4d7b-4fbc-86a7-138243049038'}]->(b);
+MATCH (a {`__sync_id`: 'bcd0a54c-3ecd-412a-93ed-70e2d7c91734'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'cb889a1e-ede5-426b-8465-86fa54509deb'}]->(b);
+MATCH (a {`__sync_id`: '0d3e2211-df7f-4c5b-98e5-62f06850fc46'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'd950c995-3b36-44ac-8819-e7092f623180'}]->(b);
+MATCH (a {`__sync_id`: '0262702a-4d1a-4c2e-8afc-0ec32e7eb302'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'e1b8f595-a453-415e-9d05-5cc1e3da855f'}]->(b);
+MATCH (a {`__sync_id`: '0262702a-4d1a-4c2e-8afc-0ec32e7eb302'}) MATCH (b {`__sync_id`: 'bcd0a54c-3ecd-412a-93ed-70e2d7c91734'}) CREATE (a)-[:`FATHER_OF` {`__sync_id`: 'e7899645-a614-4973-8f52-d944f61aa61e'}]->(b);
+MATCH (a {`__sync_id`: '862e81e0-3fd5-4d95-8480-d02d01e025dc'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'e8f8805f-26b4-42f7-8b27-769ed5e65b29'}]->(b);
+MATCH (a {`__sync_id`: 'ad886e5f-ce92-4315-b981-68f2ed8e00b5'}) MATCH (b {`__sync_id`: '0262702a-4d1a-4c2e-8afc-0ec32e7eb302'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: 'edbafd64-b3dc-4e08-baec-eb456ef7429d'}]->(b);
+MATCH (a {`__sync_id`: 'a43e150c-eee2-4cd7-b7bd-d6ca80d899e0'}) MATCH (b {`__sync_id`: '30f2fd9f-2e31-43c3-a2a0-0a76953d7851'}) CREATE (a)-[:`RULED` {`__sync_id`: 'f0dc6ad5-253f-4469-8475-d0515346e840'}]->(b);
+MATCH (a {`__sync_id`: '7e7bf693-002c-4539-9dce-873ae476ccb6'}) MATCH (b {`__sync_id`: '495cbf77-3daf-4626-b159-15138abbd222'}) CREATE (a)-[:`PARTICIPATED_IN` {`__sync_id`: 'f1055952-bd78-4c31-b73d-5288aade502a'}]->(b);
+MATCH (a {`__sync_id`: '0d3e2211-df7f-4c5b-98e5-62f06850fc46'}) MATCH (b {`__sync_id`: '367d8176-e8e7-4504-9089-7a35cf934da7'}) CREATE (a)-[:`SUCCEEDED_BY` {`__sync_id`: 'f5e8af98-d8bb-4463-bd89-9ec88b9c015a'}]->(b);
+MATCH (a {`__sync_id`: '3acc222d-5f10-4e70-b645-17462a515f4f'}) MATCH (b {`__sync_id`: '495cbf77-3daf-4626-b159-15138abbd222'}) CREATE (a)-[:`PARTICIPATED_IN` {`__sync_id`: 'f6a73b73-edfc-4379-9955-2522fc5d0e7e'}]->(b);
